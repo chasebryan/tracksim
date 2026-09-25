@@ -1,0 +1,21 @@
+# deps / build
+node_modules/
+dist/
+*.tsbuildinfo
+
+# test artifacts
+test-results/
+playwright-report/
+e2e/__screenshots__/*-actual.png
+
+# generated media & recordings (regenerate with `npm run demo:record`)
+out/
+*.mp4
+*.wav
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/

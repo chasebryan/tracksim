@@ -1,0 +1,15 @@
+{
+  "name": "@tracksim/hud",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Vite + TypeScript HUD: worker-hosted simulation, layered canvas renderer, keyed DOM panels, timeline, recording and export.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 4173 --strictPort"
+  },
+  "dependencies": {
+    "@tracksim/sim": "*"
+  }
+}
