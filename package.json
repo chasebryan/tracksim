@@ -18,6 +18,7 @@
     "test:e2e": "playwright test",
     "test:all": "npm run typecheck && npm run test && npm run build && npm run test:e2e",
     "demo:record": "tsx tools/record-demo.ts",
+    "demo:full": "tsx tools/record-full-mission.ts",
     "sim:run": "tsx tools/run-scenario.ts"
   },
   "devDependencies": {

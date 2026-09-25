@@ -168,6 +168,7 @@ const testApi: TracksimTestApi = {
   ready: readyPromise,
   pause: () => send({ type: 'pause' }),
   play: () => send({ type: 'play' }),
+  setSpeed: (value) => send({ type: 'speed', value }),
   step: (ticks) => request((requestId) => ({ type: 'step', ticks, requestId })),
   seek: (tick) => request((requestId) => ({ type: 'seek', tick, requestId })),
   snapshot: () => latestFrame?.snapshot ?? null,

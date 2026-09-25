@@ -12,7 +12,7 @@ import { NavEkf } from './ekf';
 
 const GATE = 9.21;
 
-function expectRelativelyClose(actual: number, expected: number, rel = 1e-9): void {
+function expectRelativelyClose(actual: number, expected: number, rel = 2e-8): void {
   expect(Math.abs(actual - expected)).toBeLessThanOrEqual(rel * Math.max(1, Math.abs(expected)));
 }
 

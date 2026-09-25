@@ -127,6 +127,7 @@ export interface TracksimTestApi {
   ready: Promise<void>;
   pause(): void;
   play(): void;
+  setSpeed(value: number): void;
   step(ticks: number): Promise<Snapshot>;
   seek(tick: number): Promise<Snapshot>;
   snapshot(): Snapshot | null;

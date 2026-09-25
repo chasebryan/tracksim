@@ -282,12 +282,12 @@ export class NavigationFilter implements INavigationFilter {
       H[N + 2] = vN / s2;
       H[N + 3] = -vE / s2;
       H[N + KIN + 1] = 1;
-      y[0] = z[0] - (speed + (x[KIN] as number));
-      y[1] = wrapAngle(z[1] - (Math.atan2(vE, vN) + (x[KIN + 1] as number)));
+      y[0] = (z[0] as number) - (speed + (x[KIN] as number));
+      y[1] = wrapAngle((z[1] as number) - (Math.atan2(vE, vN) + (x[KIN + 1] as number)));
       return this.ekf.update(y, H, s.R, NAV_GATE_CHI2);
     }
-    y[0] = z[0] - (x[0] as number);
-    y[1] = z[1] - (x[1] as number);
+    y[0] = (z[0] as number) - (x[0] as number);
+    y[1] = (z[1] as number) - (x[1] as number);
     return this.ekf.update(y, H_POSITION, s.R, NAV_GATE_CHI2);
   }
 

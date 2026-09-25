@@ -14,6 +14,15 @@ import { mkdirSync, rmSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { chromium } from '@playwright/test';
 
+declare const window: {
+  __tracksim?: {
+    ready: Promise<void>;
+    pause(): void;
+    step(ticks: number): Promise<unknown>;
+    snapshot(): { durationS: number } | null;
+  };
+};
+
 const [scenarioId = 'full-mission', ticksPerFrameArg = '20', seedArg] = process.argv.slice(2);
 const ticksPerFrame = Math.max(1, Number(ticksPerFrameArg));
 const FPS = 30;
