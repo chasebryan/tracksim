@@ -1,0 +1,81 @@
+{
+  "id": "decoy-swarm",
+  "name": "Decoy swarm",
+  "description": "A burst of six incoherent decoys around a tracked vehicle followed by a clutter storm. Shows the tracker confirming and then dropping short-lived decoy tracks while the real contacts survive heavy false alarms.",
+  "durationS": 150,
+  "seed": 3,
+  "platform": {
+    "pos": [0, 0],
+    "vel": [0, 250],
+    "alt": 9000
+  },
+  "phases": [
+    { "t": 0, "name": "Nominal tracking" },
+    { "t": 20, "name": "Tracks confirmed" },
+    { "t": 40, "name": "Decoy burst" },
+    { "t": 70, "name": "Clutter storm" },
+    { "t": 110, "name": "Recovery" }
+  ],
+  "contacts": [
+    {
+      "id": 1,
+      "kind": "beacon",
+      "label": "friendly",
+      "declared": true,
+      "pos": [-6000, 9000],
+      "vel": [0, 245],
+      "elevationDeg": 1,
+      "jitter": 0.5
+    },
+    {
+      "id": 2,
+      "kind": "vehicle",
+      "label": "hostile",
+      "declared": false,
+      "pos": [15000, 30000],
+      "vel": [-40, 120],
+      "elevationDeg": 5,
+      "jitter": 3
+    },
+    {
+      "id": 3,
+      "kind": "vehicle",
+      "label": "unknown",
+      "declared": false,
+      "pos": [-25000, 20000],
+      "vel": [120, 160],
+      "elevationDeg": 8,
+      "jitter": 2
+    },
+    {
+      "id": 4,
+      "kind": "vehicle",
+      "label": "unknown",
+      "declared": false,
+      "pos": [8000, -5000],
+      "vel": [30, 270],
+      "elevationDeg": -3,
+      "jitter": 2
+    }
+  ],
+  "events": [
+    { "t": 0.01, "type": "log", "message": "Decoy swarm: four contacts, nominal radar", "level": "info" },
+    {
+      "t": 40,
+      "type": "contacts.spawn",
+      "contacts": [
+        { "id": 5, "kind": "decoy", "label": "decoy", "declared": false, "pos": [13850, 35050], "vel": [-52, 131], "elevationDeg": 5, "jitter": 60, "pd": 0.65, "spawnAt": 40, "despawnAt": 73 },
+        { "id": 6, "kind": "decoy", "label": "decoy", "declared": false, "pos": [13020, 35320], "vel": [-28, 108], "elevationDeg": 5, "jitter": 60, "pd": 0.65, "spawnAt": 40, "despawnAt": 75 },
+        { "id": 7, "kind": "decoy", "label": "decoy", "declared": false, "pos": [12800, 34500], "vel": [-45, 137], "elevationDeg": 5, "jitter": 60, "pd": 0.65, "spawnAt": 40, "despawnAt": 74 },
+        { "id": 8, "kind": "decoy", "label": "decoy", "declared": false, "pos": [13700, 34150], "vel": [-33, 115], "elevationDeg": 5, "jitter": 60, "pd": 0.65, "spawnAt": 40, "despawnAt": 76 },
+        { "id": 9, "kind": "decoy", "label": "decoy", "declared": false, "pos": [14100, 34900], "vel": [-58, 122], "elevationDeg": 5, "jitter": 60, "pd": 0.65, "spawnAt": 40, "despawnAt": 75 },
+        { "id": 10, "kind": "decoy", "label": "decoy", "declared": false, "pos": [13250, 35520], "vel": [-22, 126], "elevationDeg": 5, "jitter": 60, "pd": 0.65, "spawnAt": 40, "despawnAt": 77 }
+      ]
+    },
+    { "t": 40, "type": "log", "message": "Contact 2 releases six decoys", "level": "alert" },
+    { "t": 70, "type": "radar.clutter", "rate": 10, "durationS": 40 },
+    { "t": 70, "type": "log", "message": "Radar: clutter rate x5 for 40 s", "level": "warn" },
+    { "t": 77, "type": "log", "message": "All decoys have burnt out", "level": "info" },
+    { "t": 110, "type": "log", "message": "Radar: clutter back to nominal", "level": "info" }
+  ]
+}

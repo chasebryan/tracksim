@@ -1,0 +1,58 @@
+{
+  "id": "baseline",
+  "name": "Baseline",
+  "description": "Nominal run: all five navigation sensors healthy, three contacts in radar range and a gentle platform turn. Shows steady-state fusion, M-of-N track confirmation and an intel relabel with nothing going wrong.",
+  "durationS": 120,
+  "seed": 1,
+  "platform": {
+    "pos": [0, 0],
+    "vel": [0, 250],
+    "alt": 9000
+  },
+  "phases": [
+    { "t": 0, "name": "Nominal fusion" },
+    { "t": 40, "name": "Intel relabel" },
+    { "t": 50, "name": "Gentle turn" },
+    { "t": 65, "name": "Steady state" }
+  ],
+  "contacts": [
+    {
+      "id": 1,
+      "kind": "beacon",
+      "label": "friendly",
+      "declared": true,
+      "pos": [-5000, 10000],
+      "vel": [0, 235],
+      "elevationDeg": 1.5,
+      "jitter": 0.5
+    },
+    {
+      "id": 2,
+      "kind": "vehicle",
+      "label": "hostile",
+      "declared": false,
+      "pos": [22000, 30000],
+      "vel": [-60, 60],
+      "elevationDeg": 4,
+      "jitter": 2
+    },
+    {
+      "id": 3,
+      "kind": "vehicle",
+      "label": "unknown",
+      "declared": false,
+      "pos": [-18000, 6000],
+      "vel": [110, 180],
+      "elevationDeg": -1,
+      "jitter": 2
+    }
+  ],
+  "events": [
+    { "t": 0.01, "type": "log", "message": "Baseline: all sensors nominal, three contacts in range", "level": "info" },
+    { "t": 40, "type": "intel", "contactId": 2, "label": "hostile" },
+    { "t": 40, "type": "log", "message": "Intel: contact 2 identified as hostile", "level": "info" },
+    { "t": 50, "type": "platform.turn", "rateDegS": 3, "durationS": 15 },
+    { "t": 50, "type": "log", "message": "Platform: gentle 3 deg/s turn for 15 s", "level": "info" },
+    { "t": 65, "type": "log", "message": "Platform: turn complete, heading 045", "level": "info" }
+  ]
+}

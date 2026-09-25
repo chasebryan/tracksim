@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <title>tracksim</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="hud" id="hud">
+      <header class="top-bar" id="top-bar">
+        <h1 class="brand">tracksim<span class="brand__sub">sensor fusion / MTT sandbox</span></h1>
+      </header>
+
+      <aside class="column column--left" id="left-col">
+        <section class="panel" id="platform-panel">
+          <h2 class="panel__title">platform</h2>
+        </section>
+        <section class="panel panel--grow" id="sensor-panel">
+          <h2 class="panel__title">sensors</h2>
+        </section>
+        <section class="panel" id="integrity-panel">
+          <h2 class="panel__title">filter integrity</h2>
+        </section>
+      </aside>
+
+      <main class="centre" id="centre">
+        <div class="globe-wrap" id="globe-wrap">
+          <canvas id="globe" data-testid="globe-canvas" aria-label="Situation globe"></canvas>
+        </div>
+      </main>
+
+      <aside class="column column--right" id="right-col">
+        <section class="panel" id="tracker-panel">
+          <h2 class="panel__title">radar / tracker</h2>
+        </section>
+        <section class="panel panel--scope" id="scope-panel">
+          <h2 class="panel__title">scope</h2>
+          <div class="scope-wrap" id="scope-wrap">
+            <canvas id="scope" data-testid="scope-canvas" aria-label="Filter scope"></canvas>
+          </div>
+        </section>
+        <section class="panel panel--grow" id="track-panel">
+          <h2 class="panel__title">tracks</h2>
+        </section>
+      </aside>
+
+      <footer class="dock" id="dock"></footer>
+
+      <div class="error-banner" id="error-banner" data-testid="error-banner" role="alert" hidden></div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

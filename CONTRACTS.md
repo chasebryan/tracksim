@@ -61,7 +61,7 @@ Per tick for alive contacts: `pos += vel * DT + jitter * sqrt(DT) * N(0,1)` on e
 `spawnDecoys(count, tick, nearContactId?)`: reference = the named alive contact, else the first
 alive non-decoy contact, else the platform. Each decoy: id from `9000 + counter`, kind `decoy`,
 label `decoy`, declared `false`, pos = ref pos + uniform ring 300–800 m, vel = ref vel + N(0, 15)
-per axis, `jitter = 25`, `pd = 0.65`, despawn 20–40 s later. Emit one `scenario`-source info event
+per axis, `jitter = 60`, `pd = 0.65`, despawn 20–40 s later. Emit one `scenario`-source info event
 per spawn batch. Despawning a contact emits an info event.
 
 `contactSnapshots()` reports every contact (alive or not) relative to the platform:
@@ -170,7 +170,7 @@ Built-in scenarios live in `packages/sim/scenarios/*.json` and are exported from
 - `sensor-degradation` (180 s): `TERRAIN` noise ×10 at t=30 for 40 s; `STAR` disabled t=60–100
   (two `sensor.enable` events); `SWARM` bias [400, −150] m at t=90 for 50 s; log events at each.
 - `decoy-swarm` (150 s): three vehicles; at t=40 `contacts.spawn` six decoys around contact 2
-  (jitter 25, pd 0.65, despawn ≈ t=75); `radar.clutter` 10 at t=70 for 40 s.
+  (jitter 60, pd 0.65, despawn ≈ t=75); `radar.clutter` 10 at t=70 for 40 s.
 - `full-mission` (300 s): five phases combining the above with a platform turn and acceleration.
 
 Contacts should sit 5–45 km from the platform with plausible speeds (50–300 m/s) so that most stay

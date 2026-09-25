@@ -1,2 +1,11 @@
-// Placeholder — replaced by the world module implementation.
-export {};
+export {
+  World,
+  DECOY_ID_BASE,
+  DECOY_JITTER,
+  DECOY_PD,
+  DECOY_RING_MIN_M,
+  DECOY_RING_MAX_M,
+  DECOY_VEL_SIGMA,
+  DECOY_LIFETIME_MIN_S,
+  DECOY_LIFETIME_MAX_S,
+} from './world';

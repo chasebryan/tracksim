@@ -1,0 +1,74 @@
+{
+  "id": "sensor-degradation",
+  "name": "Sensor degradation",
+  "description": "Three overlapping navigation faults on a straight leg: terrain-fix noise x10, a star-tracker outage and a swarm-mesh position bias. Shows innovation gating isolating each bad sensor and the filter recovering when the fault clears.",
+  "durationS": 180,
+  "seed": 2,
+  "platform": {
+    "pos": [0, 0],
+    "vel": [0, 250],
+    "alt": 9000
+  },
+  "phases": [
+    { "t": 0, "name": "Nominal fusion" },
+    { "t": 30, "name": "Terrain fix degraded" },
+    { "t": 60, "name": "Star tracker offline" },
+    { "t": 90, "name": "Swarm mesh biased" },
+    { "t": 140, "name": "Recovery" }
+  ],
+  "contacts": [
+    {
+      "id": 1,
+      "kind": "beacon",
+      "label": "friendly",
+      "declared": true,
+      "pos": [4000, 14000],
+      "vel": [0, 250],
+      "elevationDeg": 2,
+      "jitter": 0.5
+    },
+    {
+      "id": 2,
+      "kind": "vehicle",
+      "label": "unknown",
+      "declared": false,
+      "pos": [-20000, 25000],
+      "vel": [60, 230],
+      "elevationDeg": 6,
+      "jitter": 2
+    },
+    {
+      "id": 3,
+      "kind": "vehicle",
+      "label": "hostile",
+      "declared": false,
+      "pos": [30000, 5000],
+      "vel": [-80, 260],
+      "elevationDeg": 3,
+      "jitter": 3
+    },
+    {
+      "id": 4,
+      "kind": "vehicle",
+      "label": "friendly",
+      "declared": false,
+      "pos": [-9000, -6000],
+      "vel": [20, 280],
+      "elevationDeg": -2,
+      "jitter": 1.5
+    }
+  ],
+  "events": [
+    { "t": 0.01, "type": "log", "message": "Sensor degradation: all sensors nominal on a straight leg", "level": "info" },
+    { "t": 30, "type": "sensor.noise", "sensor": "TERRAIN", "scale": 10, "durationS": 40 },
+    { "t": 30, "type": "log", "message": "TERRAIN: contour-fix noise x10 for 40 s", "level": "warn" },
+    { "t": 60, "type": "sensor.enable", "sensor": "STAR", "enabled": false },
+    { "t": 60, "type": "log", "message": "STAR: star tracker offline", "level": "warn" },
+    { "t": 70, "type": "log", "message": "TERRAIN: noise cleared", "level": "info" },
+    { "t": 90, "type": "sensor.bias", "sensor": "SWARM", "bias": [400, -150], "durationS": 50 },
+    { "t": 90, "type": "log", "message": "SWARM: mesh fix biased by [+400, -150] m for 50 s", "level": "warn" },
+    { "t": 100, "type": "sensor.enable", "sensor": "STAR", "enabled": true },
+    { "t": 100, "type": "log", "message": "STAR: star tracker back online", "level": "info" },
+    { "t": 140, "type": "log", "message": "SWARM: bias cleared, all sensors nominal", "level": "info" }
+  ]
+}

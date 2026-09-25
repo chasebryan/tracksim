@@ -1,0 +1,111 @@
+{
+  "id": "full-mission",
+  "name": "Full mission",
+  "description": "Five-minute mission combining every effect: an intel relabel, three overlapping sensor faults, a decoy burst under clutter and reduced detection probability, then an evasive turn with acceleration. Shows fusion and tracking holding together through the whole sequence and recovering by the end.",
+  "durationS": 300,
+  "seed": 4,
+  "platform": {
+    "pos": [0, 0],
+    "vel": [0, 250],
+    "alt": 9000
+  },
+  "phases": [
+    { "t": 0, "name": "Nominal fusion" },
+    { "t": 60, "name": "Sensor degradation" },
+    { "t": 130, "name": "Decoy burst and clutter" },
+    { "t": 190, "name": "Evasive manoeuvre" },
+    { "t": 240, "name": "Recovery" }
+  ],
+  "contacts": [
+    {
+      "id": 1,
+      "kind": "beacon",
+      "label": "friendly",
+      "declared": true,
+      "pos": [5000, 12000],
+      "vel": [0, 250],
+      "elevationDeg": 2,
+      "jitter": 0.5
+    },
+    {
+      "id": 2,
+      "kind": "vehicle",
+      "label": "unknown",
+      "declared": false,
+      "pos": [-12000, 28000],
+      "vel": [30, 240],
+      "elevationDeg": 7,
+      "jitter": 2
+    },
+    {
+      "id": 3,
+      "kind": "vehicle",
+      "label": "hostile",
+      "declared": false,
+      "pos": [28000, 20000],
+      "vel": [-50, 230],
+      "elevationDeg": 4,
+      "jitter": 3
+    },
+    {
+      "id": 4,
+      "kind": "vehicle",
+      "label": "unknown",
+      "declared": false,
+      "pos": [-20000, -5000],
+      "vel": [60, 240],
+      "elevationDeg": -2,
+      "jitter": 2
+    },
+    {
+      "id": 5,
+      "kind": "vehicle",
+      "label": "friendly",
+      "declared": false,
+      "pos": [20000, 60000],
+      "vel": [-30, 220],
+      "elevationDeg": 10,
+      "jitter": 1.5,
+      "spawnAt": 180
+    }
+  ],
+  "events": [
+    { "t": 0.01, "type": "log", "message": "Full mission: four contacts, all sensors nominal", "level": "info" },
+    { "t": 30, "type": "intel", "contactId": 3, "label": "hostile" },
+    { "t": 30, "type": "log", "message": "Intel: contact 3 identified as hostile", "level": "info" },
+    { "t": 60, "type": "sensor.noise", "sensor": "TERRAIN", "scale": 10, "durationS": 30 },
+    { "t": 60, "type": "log", "message": "TERRAIN: contour-fix noise x10 for 30 s", "level": "warn" },
+    { "t": 75, "type": "sensor.enable", "sensor": "STAR", "enabled": false },
+    { "t": 75, "type": "log", "message": "STAR: star tracker offline", "level": "warn" },
+    { "t": 90, "type": "sensor.bias", "sensor": "SWARM", "bias": [400, -150], "durationS": 40 },
+    { "t": 90, "type": "log", "message": "SWARM: mesh fix biased by [+400, -150] m for 40 s", "level": "warn" },
+    { "t": 105, "type": "sensor.enable", "sensor": "STAR", "enabled": true },
+    { "t": 105, "type": "log", "message": "STAR: star tracker back online", "level": "info" },
+    {
+      "t": 130,
+      "type": "contacts.spawn",
+      "contacts": [
+        { "id": 6, "kind": "decoy", "label": "decoy", "declared": false, "pos": [-7650, 59450], "vel": [42, 251], "elevationDeg": 7, "jitter": 60, "pd": 0.65, "spawnAt": 130, "despawnAt": 163 },
+        { "id": 7, "kind": "decoy", "label": "decoy", "declared": false, "pos": [-8480, 59720], "vel": [18, 228], "elevationDeg": 7, "jitter": 60, "pd": 0.65, "spawnAt": 130, "despawnAt": 165 },
+        { "id": 8, "kind": "decoy", "label": "decoy", "declared": false, "pos": [-8700, 58900], "vel": [35, 257], "elevationDeg": 7, "jitter": 60, "pd": 0.65, "spawnAt": 130, "despawnAt": 164 },
+        { "id": 9, "kind": "decoy", "label": "decoy", "declared": false, "pos": [-7800, 58550], "vel": [27, 235], "elevationDeg": 7, "jitter": 60, "pd": 0.65, "spawnAt": 130, "despawnAt": 166 },
+        { "id": 10, "kind": "decoy", "label": "decoy", "declared": false, "pos": [-7400, 59300], "vel": [12, 242], "elevationDeg": 7, "jitter": 60, "pd": 0.65, "spawnAt": 130, "despawnAt": 165 },
+        { "id": 11, "kind": "decoy", "label": "decoy", "declared": false, "pos": [-8250, 59920], "vel": [44, 226], "elevationDeg": 7, "jitter": 60, "pd": 0.65, "spawnAt": 130, "despawnAt": 168 }
+      ]
+    },
+    { "t": 130, "type": "log", "message": "Contact 2 releases six decoys", "level": "alert" },
+    { "t": 150, "type": "radar.clutter", "rate": 10, "durationS": 30 },
+    { "t": 150, "type": "radar.pd", "pd": 0.8, "durationS": 30 },
+    { "t": 150, "type": "log", "message": "Radar: clutter x5 and detection probability x0.8 for 30 s", "level": "warn" },
+    { "t": 168, "type": "log", "message": "All decoys have burnt out", "level": "info" },
+    { "t": 180, "type": "log", "message": "Radar: clutter and detection probability back to nominal", "level": "info" },
+    { "t": 190, "type": "platform.turn", "rateDegS": 2, "durationS": 30 },
+    { "t": 190, "type": "log", "message": "Platform: evasive 2 deg/s turn for 30 s", "level": "warn" },
+    { "t": 200, "type": "platform.accel", "mps2": 1.5, "durationS": 20 },
+    { "t": 200, "type": "log", "message": "Platform: accelerating 1.5 m/s^2 for 20 s", "level": "info" },
+    { "t": 220, "type": "log", "message": "Platform: turn complete, heading 060 at 280 m/s", "level": "info" },
+    { "t": 230, "type": "contact.despawn", "id": 4 },
+    { "t": 230, "type": "log", "message": "Contact 4 has left the area", "level": "info" },
+    { "t": 240, "type": "log", "message": "Recovery: all sensors nominal, radar nominal", "level": "info" }
+  ]
+}
